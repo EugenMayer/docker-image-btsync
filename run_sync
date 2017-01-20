@@ -14,11 +14,11 @@ echo "Starting with User $USER_ID:$GROUP_ID"
 usermod -G "" resilio
 deluser resilio
 groupdel resilio
-getent group resilio || groupadd -g $GROUP_ID resilio
+groupadd -g $GROUP_ID resilio
 useradd --shell /bin/bash -u $USER_ID -o -c "" -m resilio -g $GROUP_ID
 export HOME=/home/resilio
 
 chown -R $USER_ID:$GROUP_ID /mnt
-chmod -R 0750 /mnt
+chmod -R 770 /mnt
 
 exec /bin/su - resilio -c "/usr/bin/rslsync --nodaemon $*"
